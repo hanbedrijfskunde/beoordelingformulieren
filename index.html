@@ -18,6 +18,11 @@
             width: 100%;
             height: 100%;
         }
+        textarea {
+            overflow: hidden;
+            resize: none;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -44,7 +49,7 @@
                         <th>Competentie</th>
                         <th>Beschrijving</th>
                         <th>Beoordeling</th>
-                        <th>Commentaar</th>
+                        <th>Toelichting</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,7 +78,7 @@
                             </div>
                         </td>
                         <td>
-                            <textarea class="form-control" name="comment1" id="comment1"></textarea>
+                            <textarea class="form-control" name="comment1" id="comment1" rows="6" cols="70"></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -101,7 +106,7 @@
                             </div>
                         </td>
                         <td>
-                            <textarea class="form-control" name="comment2" id="comment2"></textarea>
+                            <textarea class="form-control" name="comment2" id="comment2" rows="6" cols="70"></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -129,7 +134,7 @@
                             </div>
                         </td>
                         <td>
-                            <textarea class="form-control" name="comment3" id="comment3"></textarea>
+                            <textarea class="form-control" name="comment3" id="comment3" rows="6" cols="70"></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -157,7 +162,7 @@
                             </div>
                         </td>
                         <td>
-                            <textarea class="form-control" name="comment4" id="comment4"></textarea>
+                            <textarea class="form-control" name="comment4" id="comment4 rows="6" cols="70""></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -185,7 +190,7 @@
                             </div>
                         </td>
                         <td>
-                            <textarea class="form-control" name="comment5" id="comment5"></textarea>
+                            <textarea class="form-control" name="comment5" id="comment5" rows="6" cols="70"></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -213,7 +218,7 @@
                             </div>
                         </td>
                         <td>
-                            <textarea class="form-control" name="comment6" id="comment6"></textarea>
+                            <textarea class="form-control" name="comment6" id="comment6" rows="6" cols="70"></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -241,7 +246,7 @@
                             </div>
                         </td>
                         <td>
-                            <textarea class="form-control" name="comment7" id="comment7"></textarea>
+                            <textarea class="form-control" name="comment7" id="comment7" rows="6" cols="70"></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -269,7 +274,7 @@
                             </div>
                         </td>
                         <td>
-                            <textarea class="form-control" name="comment8" id="comment8"></textarea>
+                            <textarea class="form-control" name="comment8" id="comment8" rows="6" cols="70"></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -297,7 +302,7 @@
                             </div>
                         </td>
                         <td>
-                            <textarea class="form-control" name="comment9" id="comment9"></textarea>
+                            <textarea class="form-control" name="comment9" id="comment9" rows="6" cols="70"></textarea>
                         </td>
                     </tr>
                 </tbody>
@@ -309,18 +314,37 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const textareas = document.querySelectorAll('textarea');
+        textareas.forEach(textarea => {
+            textarea.addEventListener('input', autoResize);
+            autoResize.call(textarea); // Ensure all textareas are resized on page load
+        });
+
+        function autoResize() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        }
+    });
+
     function downloadPDF() {
+        // Trigger auto-resize for all textareas
+        const textareas = document.querySelectorAll('textarea');
+        textareas.forEach(textarea => {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        });
+
         const element = document.getElementById('pdfContent');
         html2pdf(element, {
             margin: 0.2,
             filename: 'Beoordelingsformulier.pdf',
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { scale: 2 },
-            jsPDF: { unit: 'in', format: 'A4', orientation: 'portrait' },
-            pagebreak: { mode: 'avoid-all' }
+            jsPDF: { unit: 'in', format: 'A4', orientation: 'landscape' },
+            pagebreak: { mode: ['avoid-all'] }
         });
     }
 </script>
-
 </body>
 </html>
