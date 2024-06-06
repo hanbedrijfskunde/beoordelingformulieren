@@ -300,10 +300,11 @@
                 </tr>
                 <tr><td colspan="4"><textarea class="form-control" name="comment9" id="comment9" placeholder="Toelichting" rows="5"></textarea></td></tr>
                 <tr>
+                    <td colspan="4">
+                    </td>
                 </tr>
                 <tr>
-                    <td>Algemene opmerkingen</td>
-                    <td colspan="3"><textarea class="form-control" name="remarks" id="remarks" placeholder="Opmerkingen" rows="5"></textarea></td>
+                    <td colspan="4"><textarea class="form-control" name="remarks" id="remarks" placeholder="Algemene opmerkingen" rows="5"></textarea></td>
                 </tr>
                 <tr>  
                 </tbody>
@@ -341,7 +342,7 @@
             margin: 0.2,
             filename: 'beoordelingsformulier-'+ studentName + '.pdf',
             image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
+            html2canvas: { scale: 2, logging: true, useCORS: true },
             jsPDF: { unit: 'in', format: 'A4', orientation: 'landscape' },
             pagebreak: { mode: ['avoid-all'] }
         });
