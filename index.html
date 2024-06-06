@@ -335,11 +335,11 @@
             textarea.style.height = 'auto';
             textarea.style.height = textarea.scrollHeight + 'px';
         });
-
+        const studentName = document.getElementById('studentName').value.toLowerCase();
         const element = document.getElementById('pdfContent');
         html2pdf(element, {
             margin: 0.2,
-            filename: 'Beoordelingsformulier.pdf',
+            filename: 'beoordelingsformulier-'+ studentName + '.pdf',
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { scale: 2 },
             jsPDF: { unit: 'in', format: 'A4', orientation: 'landscape' },
